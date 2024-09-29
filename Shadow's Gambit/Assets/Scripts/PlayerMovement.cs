@@ -12,18 +12,17 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Debug.Log("Player Script has Started"); // Remove this when ready to submit
     }
 
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal"); // This is A, D, LeftArrow, and RightArrow
         movement.y = Input.GetAxisRaw("Vertical"); // This is W, S, UpArrow, and DownArrow
-        while(playerOnLadder == false) // This is for Crawling
+        if(!playerOnLadder && Input.GetKeyDown(KeyCode.S)) // This is for Crawling
         {
-            if(Input.GetKeyDown(KeyCode.S)) // If we continue to do the crawling this way, then we should change the key to something like LeftControl
-            {
-                Crawl();
-            }
+            Debug.Log("Player is Crawling"); // Remove this when ready to submit
+            Crawl();
         }
     }
 
