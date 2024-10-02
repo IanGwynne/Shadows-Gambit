@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movement = Vector2.zero;
     bool isCrawling = false;
     bool isClimbing = false;
+    [SerializeField] public int playerScore = 0;
     [SerializeField] float moveSpeed = 200;
 
     void Start()
@@ -33,9 +34,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isCrawling = false;
             moveSpeed = 200; // Reset speed when not crawling
-            // Debug.Log("Player has Stopped Crawling"); // Remove this when ready to submit
-        }
-        // Need to change this to only work while in contact with object with tag "Climbable" or something to that effect        
+        }     
     }
     private void FixedUpdate()
     {
@@ -44,11 +43,11 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = movement * moveSpeed * Time.deltaTime;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision) // This code doesn't work very well. It has issues recognizing contact with Climbables (It has to do with pressing W key to climb). It does not work if BoxCollider2D on object is set to "Is Trigger".
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Climbable"))
+        if (!isCrawling && Input.GetKey(KeyCode.W))
         {
-            if (!isCrawling && Input.GetKey(KeyCode.W)) // Start climbing
+            if (other.gameObject.CompareTag("Climbable")) // Start climbing
             {
                 isClimbing = true;
                 rb.gravityScale = 0; // Disables gravity when climbing
@@ -56,13 +55,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Climbable"))
+        if (isClimbing)
         {
             isClimbing = false;
             rb.gravityScale = 1; // Enables gravity when not climbing
-            Debug.Log("Player has Stopped Climbing"); // Remove this when ready to submit
+            Debug.Log("Player has Stopped Climbing"); // Remove this when ready to submit    
         }
     }
 }
