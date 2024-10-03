@@ -20,21 +20,32 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal"); // A, D, LeftArrow, and RightArrow
-        movement.y = Input.GetAxisRaw("Vertical");   // W, S, UpArrow, and DownArrow
+        if (isClimbing)
+        {
+            movement.y = Input.GetAxisRaw("Vertical");   // W, S, UpArrow, and DownArrow
+        }
+        else
+        {
+            movement.y = 0;
+        }
 
-        // Replace this with switch case
-        // Worth trying to change the `Input.GetKey(KeyCode.(LeftControl and W))` to `Input.GetAxisRaw("")` for control compatibility
-        if (!isClimbing && Input.GetKey(KeyCode.LeftControl)) // Start crawling
+            // Replace this with switch case
+            // Worth trying to change the `Input.GetKey(KeyCode.(LeftControl and W))` to `Input.GetAxisRaw("")` for control compatibility
+            if (!isClimbing && Input.GetKey(KeyCode.LeftControl)) // Start crawling
         {
             isCrawling = true;
             moveSpeed = 100; // Change speed when crawling
+            float heightDifference = transform.localScale.y - 0.5f;
+            transform.localScale = new Vector3(transform.localScale.x, 0.5f, transform.localScale.z); // Set scale to 0.5
+            transform.position = new Vector3(transform.position.x, transform.position.y - heightDifference / 2, transform.position.z); // Adjust position
             Debug.Log("Player is Crawling"); // Remove this when ready to submit
         }
         else
         {
             isCrawling = false;
             moveSpeed = 200; // Reset speed when not crawling
-        }     
+            transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z); // Reset scale
+        }
     }
     private void FixedUpdate()
     {
