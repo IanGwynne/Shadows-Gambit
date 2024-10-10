@@ -1,78 +1,198 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody2D rb;
-    Vector2 movement = Vector2.zero;
-    bool isCrawling = false;
-    bool isClimbing = false;
+    private Rigidbody2D rb;
+    private Vector2 movement;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D playerCollider;
+    private Collider2D currentClimbable;
+
     [SerializeField] public int playerScore = 0;
-    [SerializeField] float moveSpeed = 200;
+    [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] private float climbingSpeed = 4f;
+    [SerializeField] private float crawlingSpeedMultiplier = 0.5f;
+    public LayerMask floorLayer;
+
+    private float defaultMovementSpeed;
+    private bool isCrawling, isClimbing, isInShadowArea;
+    private float climbableTop, climbableBottom;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Debug.Log("Player Script has Started"); // Remove this when ready to submit
+        defaultMovementSpeed = movementSpeed;
+        rb.gravityScale = 0; // Gravity is disabled as per game design
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerCollider = GetComponent<Collider2D>();
     }
 
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal"); // A, D, LeftArrow, and RightArrow
-        if (isClimbing)
+    // Allow movement if the player is not hiding in shadows
+    if (!isInShadowArea || (isInShadowArea && Input.GetAxisRaw("Vertical") == 0))
+    {
+        movement.x = !isClimbing ? Input.GetAxisRaw("Horizontal") * movementSpeed : 0;
+        movement.y = isClimbing ? Input.GetAxisRaw("Vertical") * climbingSpeed : 0;
+    }
+    else
+    {
+        movement = Vector2.zero; // Disable all movement when hiding
+    }
+
+    HandleCrawling();
+    HandleShadowHiding();
+    }
+
+    private void FixedUpdate()
+    {
+        // Regular horizontal movement when not climbing, otherwise climb handling
+        if (!isClimbing)
         {
-            movement.y = Input.GetAxisRaw("Vertical");   // W, S, UpArrow, and DownArrow
+            rb.velocity = new Vector2(movement.x, rb.velocity.y);
         }
         else
         {
-            movement.y = 0;
+            HandleClimbing();
         }
 
-            // Replace this with switch case
-            // Worth trying to change the `Input.GetKey(KeyCode.(LeftControl and W))` to `Input.GetAxisRaw("")` for control compatibility
-            if (!isClimbing && Input.GetKey(KeyCode.LeftControl)) // Start crawling
+        // Stop movement if no input
+        if (movement == Vector2.zero)
+        {
+            rb.velocity = Vector2.zero;
+        }
+    }
+
+    private void HandleCrawling()
+    {
+        if (!isClimbing && Input.GetAxisRaw("Crawl") > 0)
         {
             isCrawling = true;
-            moveSpeed = 100; // Change speed when crawling
-            float heightDifference = transform.localScale.y - 0.5f;
-            transform.localScale = new Vector3(transform.localScale.x, 0.5f, transform.localScale.z); // Set scale to 0.5
-            transform.position = new Vector3(transform.position.x, transform.position.y - heightDifference / 2, transform.position.z); // Adjust position
-            Debug.Log("Player is Crawling"); // Remove this when ready to submit
+            movementSpeed = defaultMovementSpeed * crawlingSpeedMultiplier;
+            AdjustPlayerHeight(0.5f); // Make the player crouch (reduce height)
         }
         else
         {
             isCrawling = false;
-            moveSpeed = 200; // Reset speed when not crawling
-            transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z); // Reset scale
+            movementSpeed = defaultMovementSpeed;
+            AdjustPlayerHeight(1f); // Restore player height to normal
         }
     }
-    private void FixedUpdate()
+
+    private void HandleShadowHiding()
     {
-        if (movement.sqrMagnitude > 0)
+        // The player can hide only if they are not crawling and inside the shadow area
+        if (isInShadowArea && !isCrawling && Input.GetAxisRaw("Vertical") > 0)
         {
-            rb.velocity = movement * moveSpeed * Time.deltaTime;
+            // TODO: Replace with hiding animation
+            SetSpriteColor(new Color(0.3f, 0.3f, 0.3f, 1f)); // Darken the sprite to indicate hiding
+            // TODO: Reduce player detectability here
+        }
+        else if (isInShadowArea && Input.GetAxisRaw("Vertical") == 0)
+        {
+            // TODO: Replace with leave hiding animation
+            SetSpriteColor(new Color(1f, 1f, 1f, 1f)); // Restore original sprite color when no longer hiding
+            // TODO: Restore player detectability to normal here
         }
     }
+
+    private void HandleClimbing()
+    {
+        // End climbing if player exceeds climbable top or bottom
+        if ((transform.position.y >= climbableTop && movement.y > 0) || (transform.position.y <= climbableBottom && movement.y < 0))
+        {
+            EndClimbing();
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, movement.y); // Apply vertical climbing velocity
+        }
+
+        // Stop movement when no vertical input
+        if (Input.GetAxisRaw("Vertical") == 0)
+        {
+            rb.velocity = Vector2.zero;
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!isCrawling && Input.GetKey(KeyCode.W))
+        if (other.CompareTag("ShadowArea"))
         {
-            if (other.gameObject.CompareTag("Climbable")) // Start climbing
+            isInShadowArea = true; // Enter shadow area, allowing hiding if conditions are met
+        }
+
+        // Handle climbing interaction with a climbable object
+        if (!isCrawling && other.CompareTag("Climbable"))
+        {
+            CacheClimbableBounds(other); // Cache the top and bottom bounds of the climbable
+            float verticalInput = Input.GetAxisRaw("Vertical");
+
+            // Climb up if vertical input is positive and below the top
+            if (verticalInput > 0 && transform.position.y < climbableTop)
             {
-                isClimbing = true;
-                rb.gravityScale = 0; // Disables gravity when climbing
-                Debug.Log("Player is Climbing"); // Remove this when ready to submit
+                StartClimbing(other);
+            }
+            // Climb down if vertical input is negative and at or above the top
+            else if (verticalInput < 0 && transform.position.y >= climbableTop)
+            {
+                StartClimbing(other);
+                movement.y = -climbingSpeed; // Set downward movement for climbing down
+                rb.velocity = new Vector2(0, movement.y);
             }
         }
     }
+
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (isClimbing)
+        if (other.CompareTag("ShadowArea"))
         {
-            isClimbing = false;
-            rb.gravityScale = 1; // Enables gravity when not climbing
-            Debug.Log("Player has Stopped Climbing"); // Remove this when ready to submit    
+            isInShadowArea = false; // Exiting shadow area removes hiding ability
         }
+
+        // End climbing if the player leaves the climbable area
+        if (isClimbing && other == currentClimbable)
+        {
+            EndClimbing();
+        }
+    }
+
+    private void StartClimbing(Collider2D climbable)
+    {
+        isClimbing = true;
+        currentClimbable = climbable;
+        rb.velocity = new Vector2(0, rb.velocity.y); // Stop horizontal movement during climbing
+
+        // Ignore collisions with floors while climbing to pass between them
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Floor"), true);
+    }
+
+    private void EndClimbing()
+    {
+        isClimbing = false;
+        currentClimbable = null;
+        rb.velocity = Vector2.zero; // Stop all movement
+
+        // Re-enable floor collisions once climbing ends
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Floor"), false);
+    }
+
+    private void CacheClimbableBounds(Collider2D climbable)
+    {
+        climbableTop = climbable.bounds.max.y;
+        climbableBottom = climbable.bounds.min.y + transform.localScale.y * 0.5f; // Adjust bottom to account for player height
+    }
+
+    private void AdjustPlayerHeight(float height)
+    {
+        // Adjust the player's height and position based on the given height (used for crawling)
+        float heightDiff = transform.localScale.y - height;
+        transform.localScale = new Vector3(transform.localScale.x, height, transform.localScale.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y - heightDiff / 2, transform.position.z);
+    }
+
+    private void SetSpriteColor(Color color)
+    {
+        spriteRenderer.color = color; // Set the player's sprite to the given color
     }
 }
