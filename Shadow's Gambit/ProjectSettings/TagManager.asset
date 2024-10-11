@@ -9,6 +9,7 @@ TagManager:
   - Lootable
   - Detection
   - ShadowArea
+  - Interactable
   layers:
   - Default
   - TransparentFX

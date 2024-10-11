@@ -15,7 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask floorLayer;
 
     private float defaultMovementSpeed;
-    private bool isCrawling, isClimbing, isInShadowArea;
+    private bool isCrawling, isClimbing, isInShadowArea, isNearInteractable;
+    private Collider2D currentInteractable;
     private float climbableTop, climbableBottom;
 
     void Start()
@@ -29,19 +30,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-    // Allow movement if the player is not hiding in shadows
-    if (!isInShadowArea || (isInShadowArea && Input.GetAxisRaw("Vertical") == 0))
-    {
-        movement.x = !isClimbing ? Input.GetAxisRaw("Horizontal") * movementSpeed : 0;
-        movement.y = isClimbing ? Input.GetAxisRaw("Vertical") * climbingSpeed : 0;
-    }
-    else
-    {
-        movement = Vector2.zero; // Disable all movement when hiding
-    }
+        // Allow movement if the player is not hiding in shadows
+        if (!isInShadowArea || (isInShadowArea && Input.GetAxisRaw("Vertical") == 0))
+        {
+            movement.x = !isClimbing ? Input.GetAxisRaw("Horizontal") * movementSpeed : 0;
+            movement.y = isClimbing ? Input.GetAxisRaw("Vertical") * climbingSpeed : 0;
+        }
+        else
+        {
+            movement = Vector2.zero; // Disable all movement when hiding
+        }
 
-    HandleCrawling();
-    HandleShadowHiding();
+        HandleCrawling();
+        HandleShadowHiding();
+
+        // Check for interactable objects and interact
+        if (isNearInteractable && Input.GetAxisRaw("Vertical") > 0)
+        {
+            InteractWithObject();
+        }
     }
 
     private void FixedUpdate()
@@ -115,6 +122,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void InteractWithObject()
+    {
+        if (currentInteractable != null)
+        {
+            Interactable interactable = currentInteractable.GetComponent<Interactable>();
+            if (interactable != null)
+            {
+                interactable.Interact(); // Trigger the interactable's specific interaction
+            }
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("ShadowArea"))
@@ -141,6 +160,11 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(0, movement.y);
             }
         }
+        if (other.CompareTag("Interactable"))
+        {
+            isNearInteractable = true;
+            currentInteractable = other; // Cache the interactable object
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -154,6 +178,12 @@ public class PlayerMovement : MonoBehaviour
         if (isClimbing && other == currentClimbable)
         {
             EndClimbing();
+        }
+
+        if (other.CompareTag("Interactable"))
+        {
+            isNearInteractable = false; // No longer near an interactable object
+            currentInteractable = null; // Clear the cached interactable object
         }
     }
 
