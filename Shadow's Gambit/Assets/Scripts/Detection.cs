@@ -9,32 +9,77 @@ public class Detection : MonoBehaviour
 
     private Coroutine tickUpCoroutine;
     private Coroutine tickDownCoroutine;
+    private PlayerMovement playerMovement;
+    private bool isInDetectionArea = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Find the GameObject with the PlayerMovement script
+        GameObject player = GameObject.Find("PlayerForTesting");
 
+        if (player != null)
+        {
+            playerMovement = player.GetComponent<PlayerMovement>();
+        }
+        else
+        {
+            Debug.LogError("Player GameObject not found!");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerMovement != null)
+        {
+            if (playerMovement.IsHidden())
+            {
+                if (tickUpCoroutine != null)
+                {
+                    StopCoroutine(tickUpCoroutine);
+                    tickUpCoroutine = null;
+                }
 
+                if (tickDownCoroutine == null)
+                {
+                    tickDownCoroutine = StartCoroutine(TickDownDetectionCount());
+                }
+            }
+            else if (isInDetectionArea)
+            {
+                if (tickDownCoroutine != null)
+                {
+                    StopCoroutine(tickDownCoroutine);
+                    tickDownCoroutine = null;
+                }
+
+                if (tickUpCoroutine == null)
+                {
+                    tickUpCoroutine = StartCoroutine(TickUpDetectionCount());
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Detection"))
         {
-            if (tickDownCoroutine != null)
-            {
-                StopCoroutine(tickDownCoroutine);
-                tickDownCoroutine = null;
-            }
+            isInDetectionArea = true;
 
-            if (tickUpCoroutine == null)
+            if (playerMovement != null && !playerMovement.IsHidden())
             {
-                tickUpCoroutine = StartCoroutine(TickUpDetectionCount());
+                if (tickDownCoroutine != null)
+                {
+                    StopCoroutine(tickDownCoroutine);
+                    tickDownCoroutine = null;
+                }
+
+                if (tickUpCoroutine == null)
+                {
+                    tickUpCoroutine = StartCoroutine(TickUpDetectionCount());
+                }
             }
         }
     }
@@ -43,6 +88,8 @@ public class Detection : MonoBehaviour
     {
         if (other.CompareTag("Detection"))
         {
+            isInDetectionArea = false;
+
             if (tickUpCoroutine != null)
             {
                 StopCoroutine(tickUpCoroutine);
@@ -78,5 +125,9 @@ public class Detection : MonoBehaviour
             yield return new WaitForSeconds(tickInterval);
         }
     }
-}
 
+    public int GetDetectionCount()
+    {
+        return detectionCount;
+    }
+}
