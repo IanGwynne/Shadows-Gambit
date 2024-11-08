@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float climbingSpeed = 4f;
     [SerializeField] private float crawlingSpeedMultiplier = 0.5f;
     public LayerMask floorLayer;
+    public bool teleportCooldown = false;
 
     private float defaultMovementSpeed;
     private bool isCrawling, isClimbing, isInShadowArea, isNearInteractable;
@@ -121,7 +122,6 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
     }
-
     private void InteractWithObject()
     {
         if (currentInteractable != null)
@@ -160,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(0, movement.y);
             }
         }
+
         if (other.CompareTag("Interactable"))
         {
             isNearInteractable = true;

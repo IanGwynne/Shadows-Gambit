@@ -10,6 +10,10 @@ TagManager:
   - Detection
   - ShadowArea
   - Interactable
+  - Door
+  - Camera
+  - Guard
+  - Elevator
   layers:
   - Default
   - TransparentFX
