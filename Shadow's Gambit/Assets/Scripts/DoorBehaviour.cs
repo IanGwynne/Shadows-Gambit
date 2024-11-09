@@ -10,12 +10,15 @@ public class DoorBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player is in contact with Door.");
             PlayerMovement player = other.GetComponent<PlayerMovement>();
 
             if (!player.teleportCooldown) // Check if player is on cooldown
             {
+                Debug.Log("Player not on cooldown.");
                 if (Input.GetAxisRaw("Vertical") == 1)
                 {
+                    Debug.Log("Player pressed vertical key.");
                     StartCoroutine(TeleportPlayer(player));
                 }
             }
@@ -24,6 +27,7 @@ public class DoorBehaviour : MonoBehaviour
 
     private IEnumerator TeleportPlayer(PlayerMovement player)
     {
+        Debug.Log("Player Teleported.");
         player.teleportCooldown = true; // Activate cooldown on player
         player.transform.position = (Vector2)linkedDoor.transform.position + teleportOffset;
 

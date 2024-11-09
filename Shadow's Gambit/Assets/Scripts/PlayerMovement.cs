@@ -16,9 +16,10 @@ public class PlayerMovement : MonoBehaviour
     public bool teleportCooldown = false;
 
     private float defaultMovementSpeed;
-    private bool isCrawling, isClimbing, isInShadowArea, isNearInteractable;
+    private bool isCrawling, isClimbing, isInShadowArea, isNearInteractable, isHidden;
     private Collider2D currentInteractable;
     private float climbableTop, climbableBottom;
+
 
     void Start()
     {
@@ -95,12 +96,14 @@ public class PlayerMovement : MonoBehaviour
             // TODO: Replace with hiding animation
             SetSpriteColor(new Color(0.3f, 0.3f, 0.3f, 1f)); // Darken the sprite to indicate hiding
             // TODO: Reduce player detectability here
+            isHidden = true; 
         }
         else if (isInShadowArea && Input.GetAxisRaw("Vertical") == 0)
         {
             // TODO: Replace with leave hiding animation
             SetSpriteColor(new Color(1f, 1f, 1f, 1f)); // Restore original sprite color when no longer hiding
             // TODO: Restore player detectability to normal here
+            isHidden = false;
         }
     }
 
@@ -122,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
     }
+
     private void InteractWithObject()
     {
         if (currentInteractable != null)
@@ -160,7 +164,6 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(0, movement.y);
             }
         }
-
         if (other.CompareTag("Interactable"))
         {
             isNearInteractable = true;
@@ -225,5 +228,11 @@ public class PlayerMovement : MonoBehaviour
     private void SetSpriteColor(Color color)
     {
         spriteRenderer.color = color; // Set the player's sprite to the given color
+    }
+
+    // Public function to get the isHidden value
+    public bool IsHidden()
+    {
+        return isHidden;
     }
 }
