@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
         HandleCrawling();
         HandleShadowHiding();
+        FlipSprite(); // Flip the sprite based on movement direction
 
         // Check for interactable objects and interact
         if (isNearInteractable && Input.GetAxisRaw("Vertical") > 0)
@@ -228,6 +229,19 @@ public class PlayerMovement : MonoBehaviour
     private void SetSpriteColor(Color color)
     {
         spriteRenderer.color = color; // Set the player's sprite to the given color
+    }
+
+    // Method to flip the sprite based on movement direction
+    private void FlipSprite()
+    {
+        if (movement.x > 0)
+        {
+            spriteRenderer.flipX = false; // Face right
+        }
+        else if (movement.x < 0)
+        {
+            spriteRenderer.flipX = true; // Face left
+        }
     }
 
     // Public function to get the isHidden value
