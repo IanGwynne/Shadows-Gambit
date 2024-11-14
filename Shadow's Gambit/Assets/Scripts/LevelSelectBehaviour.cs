@@ -15,7 +15,7 @@ public class LevelSelectBehaviour : MonoBehaviour
             }
             case 2:
             {
-                Debug.Log("This level is not yet implemented");
+                SceneManager.LoadScene("Level 2");
                 break;
             }
             case 3:
