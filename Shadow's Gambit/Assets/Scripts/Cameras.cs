@@ -12,7 +12,7 @@ public class Cameras : MonoBehaviour
         flipTimer = flipInterval;
 
         // Find the GameObject with the PlayerMovement script
-        GameObject player = GameObject.Find("PlayerForTesting");
+        GameObject player = GameObject.Find("Player");
 
         if (player != null)
         {
@@ -28,12 +28,17 @@ public class Cameras : MonoBehaviour
     {
         if (!isPlayerDetected || playerMovement.IsHidden())
         {
-            flipTimer -= Time.deltaTime;
-            if (flipTimer <= 0f)
-            {
-                FlipDirection();
-                flipTimer = flipInterval;
-            }
+            flip();
+        }
+    }
+
+    void flip()
+    {
+        flipTimer -= Time.deltaTime;
+        if (flipTimer <= 0f)
+        {
+            FlipDirection();
+            flipTimer = flipInterval;
         }
     }
 

@@ -195,7 +195,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionCount: 0
+  gameOverAmount: 30
   tickInterval: 1
+  GameOverScreen: {fileID: 9122287290167513812, guid: e6b2db645a1188143a6ea070eb12301c, type: 3}
 --- !u!114 &173748879716123647
 MonoBehaviour:
   m_ObjectHideFlags: 0

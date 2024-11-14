@@ -1,12 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Detection : MonoBehaviour
 {
     [SerializeField] private int detectionCount = 0;
+    [SerializeField] private int gameOverAmount = 30;
     [SerializeField] private float tickInterval = 1.0f; // Speed at which it ticks up/down, higher is slower
+    [SerializeField] private GameObject GameOverScreen; // Reference to the Game Over UI Prefab
 
+    private GameObject gameOverScreenInstance;
+    private Button retryButton;
     private Coroutine tickUpCoroutine;
     private Coroutine tickDownCoroutine;
     private PlayerMovement playerMovement;
@@ -26,6 +31,14 @@ public class Detection : MonoBehaviour
         {
             Debug.LogError("Player GameObject not found!");
         }
+
+        // Instantiate the Game Over Screen and set it up
+        gameOverScreenInstance = Instantiate(GameOverScreen);
+        gameOverScreenInstance.SetActive(false); // Hide the Game Over Screen at the start
+
+        // Find the Retry Button in the instantiated UI and add a listener to it
+        retryButton = gameOverScreenInstance.GetComponentInChildren<Button>();
+        retryButton.onClick.AddListener(RestartLevel);
     }
 
     // Update is called once per frame
@@ -109,6 +122,7 @@ public class Detection : MonoBehaviour
         {
             detectionCount++;
             Debug.Log("Detection count increased: " + detectionCount);
+            CheckGameOver();
             yield return new WaitForSeconds(tickInterval);
         }
     }
@@ -124,6 +138,22 @@ public class Detection : MonoBehaviour
             }
             yield return new WaitForSeconds(tickInterval);
         }
+    }
+
+    private void CheckGameOver()
+    {
+        if (detectionCount >= gameOverAmount)
+        {
+            Debug.Log("Game Over!");
+            gameOverScreenInstance.SetActive(true); // Show the Game Over UI
+            Time.timeScale = 0f; // Pause the game
+        }
+    }
+
+    private void RestartLevel()
+    {
+        Time.timeScale = 1f; // Resume the game
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
     }
 
     public int GetDetectionCount()
