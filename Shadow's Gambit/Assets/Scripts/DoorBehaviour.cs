@@ -5,7 +5,7 @@ public class DoorBehaviour : MonoBehaviour
 {
     public DoorBehaviour linkedDoor; // Reference to the corresponding door
     public float cooldownDuration = 1f; // Time before the player can teleport again
-    [SerializeField] Vector2 teleportOffset = new Vector2(0f, -0.85f);
+    [SerializeField] Vector2 teleportOffset = new Vector2(0f, -1);
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

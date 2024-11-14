@@ -11,5 +11,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/level 1 shadow gambit.unity
     guid: 319292df3ba50f846ad05d01b268946b
+  - enabled: 1
+    path: Assets/Scenes/StartScreen.unity
+    guid: 86cabe3c94ba6be48a568a4d7887b7cd
+  - enabled: 1
+    path: Assets/Scenes/Level 3.unity
+    guid: 8f7553681e74a704f8bfb34539a515df
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: d37f6c4ae3e7fcc4cba8669af5b12ab4
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

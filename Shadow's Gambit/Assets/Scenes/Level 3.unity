@@ -1048,7 +1048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedDoor: {fileID: 950200521}
   cooldownDuration: 1
-  teleportOffset: {x: 0, y: -0.85}
+  teleportOffset: {x: 0, y: -1}
 --- !u!61 &185278466
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20299,7 +20299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7671910438016257886, guid: a7707dcce37141f458bec26d2e97ea14, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.589
+      value: -4.99
       objectReference: {fileID: 0}
     - target: {fileID: 7671910438016257886, guid: a7707dcce37141f458bec26d2e97ea14, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20514,7 +20514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedDoor: {fileID: 1381341966}
   cooldownDuration: 1
-  teleportOffset: {x: 0, y: -0.85}
+  teleportOffset: {x: 0, y: -1}
 --- !u!61 &775530084
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21138,11 +21138,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8988673014576339945, guid: 249e023f9fdb2dc45b05a2c2d843ee23, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.2
+      value: -14.77
       objectReference: {fileID: 0}
     - target: {fileID: 8988673014576339945, guid: 249e023f9fdb2dc45b05a2c2d843ee23, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.37
+      value: 6.57
       objectReference: {fileID: 0}
     - target: {fileID: 8988673014576339945, guid: 249e023f9fdb2dc45b05a2c2d843ee23, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21626,7 +21626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6610442784717352622, guid: 754eca43014597f468da476364a464d1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.54
+      value: -5.09
       objectReference: {fileID: 0}
     - target: {fileID: 6610442784717352622, guid: 754eca43014597f468da476364a464d1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21890,7 +21890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedDoor: {fileID: 185278465}
   cooldownDuration: 1
-  teleportOffset: {x: 0, y: -0.85}
+  teleportOffset: {x: 0, y: -1}
 --- !u!61 &950200522
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -29834,7 +29834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedDoor: {fileID: 775530083}
   cooldownDuration: 1
-  teleportOffset: {x: 0, y: -0.85}
+  teleportOffset: {x: 0, y: -1}
 --- !u!61 &1381341967
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30450,7 +30450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedDoor: {fileID: 2099165369}
   cooldownDuration: 1
-  teleportOffset: {x: 0, y: -0.85}
+  teleportOffset: {x: 0, y: -1}
 --- !u!61 &1490970017
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32044,7 +32044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedDoor: {fileID: 1490970016}
   cooldownDuration: 1
-  teleportOffset: {x: 0, y: -0.85}
+  teleportOffset: {x: 0, y: -1}
 --- !u!61 &2099165370
 BoxCollider2D:
   m_ObjectHideFlags: 0
