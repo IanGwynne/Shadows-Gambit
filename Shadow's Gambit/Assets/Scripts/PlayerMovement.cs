@@ -213,8 +213,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void CacheClimbableBounds(Collider2D climbable)
     {
-        climbableTop = climbable.bounds.max.y;
-        climbableBottom = climbable.bounds.min.y + transform.localScale.y * 0.5f; // Adjust bottom to account for player height
+        climbableTop = climbable.bounds.max.y - 0.05f;
+        climbableBottom = climbable.bounds.min.y + 0.06f; // Adjust bottom to account for player height
     }
 
     private void AdjustPlayerHeight(float height)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class LootableBehaviour : MonoBehaviour
 {
@@ -10,8 +11,9 @@ public class LootableBehaviour : MonoBehaviour
     // Reference to the PlayerMovement script
     private PlayerMovement playerMovement;
     
-    // Reference to the SpriteRenderer component
-    private SpriteRenderer spriteRenderer;
+    // Reference to the tilemap component
+    private Tilemap tilemap;
+    private Color color = new Color(0.5f, 0.5f, 0.5f);
     void Start()
     {
         // Find the Player GameObject and get the PlayerMovement script from it
@@ -21,8 +23,8 @@ public class LootableBehaviour : MonoBehaviour
             playerMovement = player.GetComponent<PlayerMovement>();
         }
 
-        // Get the SpriteRenderer component attached to the Lootable object
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        // Get the tilemap component attached to the Lootable object
+        tilemap = GetComponent<Tilemap>();
     }
     private void OnTriggerStay2D(Collider2D other) 
     {
@@ -37,9 +39,9 @@ public class LootableBehaviour : MonoBehaviour
                 Debug.Log("Player score is: " + playerMovement.playerScore); // Remove this when ready to submit
 
                 // Change the color of the object to red for testing purposes
-                if (spriteRenderer != null)
+                if (tilemap != null)
                 {
-                    spriteRenderer.color = Color.red;
+                    tilemap.GetComponent<TilemapRenderer>().material.color = color;
                 }
                 // Change sprite
             }

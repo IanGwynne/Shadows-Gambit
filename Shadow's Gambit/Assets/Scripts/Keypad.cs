@@ -16,7 +16,9 @@ public class Keypad : Interactable
 
     private void GenerateRandomCode()
     {
-        currentCode = Random.Range(1000, 9999).ToString();
+        int currentMinDigits = (int)Mathf.Pow(10, maxDigits - 1);
+        int currentMaxDigits = (int)Mathf.Pow(10, maxDigits) - 1;
+        currentCode = Random.Range(currentMinDigits, currentMaxDigits + 1).ToString();
         Debug.Log("Generated Keycode: " + currentCode);
     }
 
