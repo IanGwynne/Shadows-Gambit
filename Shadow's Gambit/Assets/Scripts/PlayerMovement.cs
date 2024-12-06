@@ -134,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
             Interactable interactable = currentInteractable.GetComponent<Interactable>();
             if (interactable != null)
             {
+                Debug.Log("Interactable: " + interactable);
                 interactable.Interact(); // Trigger the interactable's specific interaction
             }
         }

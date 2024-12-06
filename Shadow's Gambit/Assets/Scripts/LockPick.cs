@@ -23,7 +23,7 @@ public class LockPick : Interactable
         {
             ShowInteractableUI();  // Show the lock-picking UI when interacting
             canStartInput = false;  // Disable input initially to avoid immediate interaction
-            Debug.Log("Lock picking interaction triggered.");
+            Debug.Log($"Lock picking interaction triggered. and canStartInput = {canStartInput}");
             Invoke("EnableInput", 0.2f);  // Delay input by 0.2 seconds to prevent immediate interaction
         }
         else
@@ -36,6 +36,7 @@ public class LockPick : Interactable
     private void EnableInput()
     {
         canStartInput = true;
+        Debug.Log($"canStartInput = {canStartInput}");
     }
 
     private void Update()
@@ -52,12 +53,16 @@ public class LockPick : Interactable
     // Handle the lock-picking process
     private void HandleLockPicking()
     {
+        Debug.Log($"maxPins = {maxPins}");
         if (currentPin < maxPins)
         {
+            Debug.Log($"currentPin = {currentPin}");
             // Handle raising the pin when the player presses the W key
             if (Input.GetAxisRaw("Vertical") > 0 && !axisInUse)
             {
+                Debug.Log($"axisInUse = {axisInUse}");
                 axisInUse = true;  // Mark the axis as in use
+                Debug.Log($"axisInUse = {axisInUse}");
 
                 // Raise the current pin
                 pinSliders[currentPin].value += pinSpeed;
@@ -109,6 +114,7 @@ public class LockPick : Interactable
     // Reset all pins to the bottom position
     private void ResetPins()
     {
+        Debug.Log("Resetting Pins");
         foreach (Slider pinSlider in pinSliders)
         {
             pinSlider.value = 0;  // Reset pin to 0
