@@ -21432,11 +21432,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8988673014576339945, guid: 249e023f9fdb2dc45b05a2c2d843ee23, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.77
+      value: -14.32
       objectReference: {fileID: 0}
     - target: {fileID: 8988673014576339945, guid: 249e023f9fdb2dc45b05a2c2d843ee23, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.01
+      value: 7.036
       objectReference: {fileID: 0}
     - target: {fileID: 8988673014576339945, guid: 249e023f9fdb2dc45b05a2c2d843ee23, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32616,6 +32616,7 @@ GameObject:
   - component: {fileID: 2117107413}
   - component: {fileID: 2117107417}
   - component: {fileID: 2117107416}
+  - component: {fileID: 2117107418}
   - component: {fileID: 2117107415}
   m_Layer: 0
   m_Name: Treasure
@@ -32884,6 +32885,19 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &2117107418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117107411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c1754d63db97842a4f950e3c657fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLevelName: Win Screen
 --- !u!1 &2117730969
 GameObject:
   m_ObjectHideFlags: 0
