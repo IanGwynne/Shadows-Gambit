@@ -243,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
         float heightDiff = playerCollider.bounds.size.y - targetHeight;
 
         // Adjust position before scaling to prevent clipping
-        transform.position = new Vector3(transform.position.x, transform.position.y - (isCrouching ? heightDiff / 2 : -heightDiff / 2), transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y - heightDiff / 2, transform.position.z);
 
         // Adjust the scale after position to ensure alignment
         transform.localScale = new Vector3(originalScale.x, targetHeight / defaultHeight * originalScale.y, originalScale.z);

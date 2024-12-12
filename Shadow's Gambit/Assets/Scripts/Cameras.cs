@@ -25,11 +25,11 @@ public class Cameras : MonoBehaviour
         }
         if (visionCone == null)
         {
-            Debug.LogError("VisionCone script not assigned to the Guard!");
+            Debug.LogError("VisionCone script not assigned to the Camera!");
         }
         if (detectionManager == null)
         {
-            Debug.LogError("DetectionManager not assigned to the Guard!");
+            Debug.LogError("DetectionManager not assigned to the Camera!");
         }
     }
 

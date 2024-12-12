@@ -29,6 +29,7 @@ public class DetectionManager : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(detectionCount);
         CheckGameOver();
     }
 
