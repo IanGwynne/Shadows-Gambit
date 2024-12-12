@@ -215,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(0, rb.velocity.y); // Stop horizontal movement during climbing
 
         // Ignore collisions with floors while climbing to pass between them
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Floor"), true);
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("VisionObscuring"), true);
     }
 
     private void EndClimbing()
@@ -225,7 +225,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector2.zero; // Stop all movement
 
         // Re-enable floor collisions once climbing ends
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Floor"), false);
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("VisionObscuring"), false);
     }
 
     private void CacheClimbableBounds(Collider2D climbable)

@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 67616298}
   - component: {fileID: 67616297}
   - component: {fileID: 67616299}
+  - component: {fileID: 67616300}
   m_Layer: 0
   m_Name: FileCabinet_0 (1)
   m_TagString: Untagged
@@ -219,15 +220,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 67616296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b63613c5b782034a88151ef4bb90067, type: 3}
+  m_Script: {fileID: 11500000, guid: 89cfce318dff50a4596a8aa3a2cc566f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableUI: {fileID: 0}
-  noteText: {fileID: 0}
-  tutorialContent: This is a tutorial note.
-  isTutorialNote: 0
-  isKeycodeNote: 1
-  keypad: {fileID: 0}
+  scoreValue: 2000
+--- !u!61 &67616300
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67616296}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &119053045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1704,7 +1746,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5, y: 1.016, z: -10}
+  m_LocalPosition: {x: -6.5, y: 1.03, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1756,6 +1798,7 @@ GameObject:
   - component: {fileID: 551336688}
   - component: {fileID: 551336687}
   - component: {fileID: 551336689}
+  - component: {fileID: 551336690}
   m_Layer: 0
   m_Name: FileCabinet_0 (2)
   m_TagString: Untagged
@@ -1839,15 +1882,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 551336686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b63613c5b782034a88151ef4bb90067, type: 3}
+  m_Script: {fileID: 11500000, guid: 89cfce318dff50a4596a8aa3a2cc566f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableUI: {fileID: 0}
-  noteText: {fileID: 0}
-  tutorialContent: This is a tutorial note.
-  isTutorialNote: 0
-  isKeycodeNote: 1
-  keypad: {fileID: 0}
+  scoreValue: 2000
+--- !u!61 &551336690
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551336686}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!4 &580740167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3825443047243413398, guid: d15f4fd6e2de173469ae8a50503f57a3, type: 3}
@@ -2292,10 +2376,9 @@ Transform:
   m_LocalPosition: {x: -8.36, y: -13.636862, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 932674669}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &747146980
 MonoBehaviour:
@@ -2325,7 +2408,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3825443047243413398, guid: d15f4fd6e2de173469ae8a50503f57a3, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3825443047243413398, guid: d15f4fd6e2de173469ae8a50503f57a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2926,6 +3009,7 @@ GameObject:
   - component: {fileID: 820151215}
   - component: {fileID: 820151214}
   - component: {fileID: 820151216}
+  - component: {fileID: 820151217}
   m_Layer: 0
   m_Name: ElevatorDown
   m_TagString: Door
@@ -3015,6 +3099,52 @@ MonoBehaviour:
   linkedDoor: {fileID: 1242595359}
   cooldownDuration: 1
   teleportOffset: {x: 0, y: -0.85}
+--- !u!61 &820151217
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820151213}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 1}
+    newSize: {x: 0.5, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.5, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &868267639
 GameObject:
   m_ObjectHideFlags: 0
@@ -6938,7 +7068,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060274572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5, y: 1.016, z: -10}
+  m_LocalPosition: {x: -6.5, y: 1.03, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7328,7 +7458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8988673014576339945, guid: 249e023f9fdb2dc45b05a2c2d843ee23, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.016
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 8988673014576339945, guid: 249e023f9fdb2dc45b05a2c2d843ee23, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7362,8 +7492,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1480757100933242382, guid: 249e023f9fdb2dc45b05a2c2d843ee23, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7379,6 +7508,7 @@ GameObject:
   - component: {fileID: 1242595358}
   - component: {fileID: 1242595357}
   - component: {fileID: 1242595359}
+  - component: {fileID: 1242595360}
   m_Layer: 0
   m_Name: ElevatorUp
   m_TagString: Door
@@ -7468,6 +7598,52 @@ MonoBehaviour:
   linkedDoor: {fileID: 820151216}
   cooldownDuration: 1
   teleportOffset: {x: 0, y: -0.85}
+--- !u!61 &1242595360
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242595356}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 1}
+    newSize: {x: 0.5, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.5, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1247571103 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6607814130440928942, guid: 76b862986263a5342a19bf929f4cabcb, type: 3}
@@ -10517,6 +10693,7 @@ GameObject:
   - component: {fileID: 1854070411}
   - component: {fileID: 1854070410}
   - component: {fileID: 1854070412}
+  - component: {fileID: 1854070413}
   m_Layer: 0
   m_Name: FileCabinet_0
   m_TagString: Untagged
@@ -10600,15 +10777,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 1854070409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b63613c5b782034a88151ef4bb90067, type: 3}
+  m_Script: {fileID: 11500000, guid: 89cfce318dff50a4596a8aa3a2cc566f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableUI: {fileID: 0}
-  noteText: {fileID: 0}
-  tutorialContent: This is a tutorial note.
-  isTutorialNote: 0
-  isKeycodeNote: 1
-  keypad: {fileID: 0}
+  scoreValue: 2000
+--- !u!61 &1854070413
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854070409}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1872445416
 GameObject:
   m_ObjectHideFlags: 0
