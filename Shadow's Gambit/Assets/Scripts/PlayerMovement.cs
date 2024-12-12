@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isCrawling, isClimbing, isInShadowArea, isNearInteractable, isHidden;
     private Collider2D currentInteractable;
     private float climbableTop, climbableBottom;
+    private float defaultHeight; // The player's original height
+    private Vector3 originalScale; // The player's original scale
+
 
 
     void Start()
@@ -28,7 +31,13 @@ public class PlayerMovement : MonoBehaviour
         rb.gravityScale = 0; // Gravity is disabled as per game design
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<Collider2D>();
+
+        // Store the original height and scale
+        defaultHeight = playerCollider.bounds.size.y;
+        originalScale = transform.localScale;
     }
+
+
 
     void Update()
     {
@@ -75,19 +84,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleCrawling()
     {
-        if (!isClimbing && Input.GetAxisRaw("Crawl") > 0)
+        bool isCrawlKeyPressed = Input.GetAxisRaw("Crawl") > 0;
+
+        // Transition into and out of crawling states
+        if (isCrawlKeyPressed && !isCrawling)
         {
             isCrawling = true;
             movementSpeed = defaultMovementSpeed * crawlingSpeedMultiplier;
-            AdjustPlayerHeight(0.5f); // Make the player crouch (reduce height)
+            AdjustPlayerHeight(true); // Set to crouching height
         }
-        else
+        else if (!isCrawlKeyPressed && isCrawling)
         {
             isCrawling = false;
             movementSpeed = defaultMovementSpeed;
-            AdjustPlayerHeight(1f); // Restore player height to normal
+            AdjustPlayerHeight(false); // Restore to default height
         }
     }
+
+
+
 
     private void HandleShadowHiding()
     {
@@ -97,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
             // TODO: Replace with hiding animation
             SetSpriteColor(new Color(0.3f, 0.3f, 0.3f, 1f)); // Darken the sprite to indicate hiding
             // TODO: Reduce player detectability here
-            isHidden = true; 
+            isHidden = true;
         }
         else if (isInShadowArea && Input.GetAxisRaw("Vertical") == 0)
         {
@@ -219,13 +234,22 @@ public class PlayerMovement : MonoBehaviour
         climbableBottom = climbable.bounds.min.y + 0.06f; // Adjust bottom to account for player height
     }
 
-    private void AdjustPlayerHeight(float height)
+    private void AdjustPlayerHeight(bool isCrouching)
     {
-        // Adjust the player's height and position based on the given height (used for crawling)
-        float heightDiff = transform.localScale.y - height;
-        transform.localScale = new Vector3(transform.localScale.x, height, transform.localScale.z);
-        transform.position = new Vector3(transform.position.x, transform.position.y - heightDiff / 2, transform.position.z);
+        // Calculate the target height
+        float targetHeight = isCrouching ? defaultHeight / 2 : defaultHeight;
+
+        // Calculate the height difference
+        float heightDiff = playerCollider.bounds.size.y - targetHeight;
+
+        // Adjust position before scaling to prevent clipping
+        transform.position = new Vector3(transform.position.x, transform.position.y - (isCrouching ? heightDiff / 2 : -heightDiff / 2), transform.position.z);
+
+        // Adjust the scale after position to ensure alignment
+        transform.localScale = new Vector3(originalScale.x, targetHeight / defaultHeight * originalScale.y, originalScale.z);
     }
+
+
 
     private void SetSpriteColor(Color color)
     {

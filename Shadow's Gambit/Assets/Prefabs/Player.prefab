@@ -77,8 +77,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c4bb66ac5dc33f2498a8d7394793d5c5, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 73ac23336223a6949a7e56f04371489d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -150,17 +150,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0029211044, y: -0.058410645}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9318409, y: 1.8889563}
   m_EdgeRadius: 0
 --- !u!114 &6821336738226332006
 MonoBehaviour:
@@ -194,10 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6a62028f56a8e42a01cb682a82fd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionCount: 0
-  gameOverAmount: 30
-  tickInterval: 1
-  GameOverScreen: {fileID: 0}
+  detectionManager: {fileID: 7488320692663376401, guid: 6525dfcb0835e264daf8f5c92483dfa6, type: 3}
 --- !u!114 &173748879716123647
 MonoBehaviour:
   m_ObjectHideFlags: 0
